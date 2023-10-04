@@ -6,11 +6,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { FontAwesome } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { useState } from 'react';
 
 export default function PlayerMusica() {
+  const [pausado, setPausado] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
       <Appbar
@@ -58,8 +58,12 @@ export default function PlayerMusica() {
           <TouchableOpacity onPress={() => { }}>
             <FontAwesome name="step-backward" size={36} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
-            <FontAwesome name="play-circle" size={36} color="black" />
+          <TouchableOpacity onPress={() => { setPausado(!pausado) }}>
+            {
+              (pausado)
+                ? <FontAwesome name="pause-circle" size={72} color="black" />
+                : <FontAwesome name="play-circle" size={72} color="black" />
+            }
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { }}>
             <FontAwesome name="step-forward" size={36} color="black" />
@@ -67,6 +71,7 @@ export default function PlayerMusica() {
           <TouchableOpacity onPress={() => { }}>
             <FontAwesome name="random" size={36} color="black" />
           </TouchableOpacity>
+
         </View>
       </View>
     </View>
@@ -123,8 +128,8 @@ const styles = StyleSheet.create({
   botoes: {
     width: "100%",
     flexDirection: "row",
-    // columnGap: 16
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 16,
   }
 });
