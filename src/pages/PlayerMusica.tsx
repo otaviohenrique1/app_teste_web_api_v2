@@ -5,6 +5,10 @@ import { Appbar } from '../components/Appbar';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
+import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 export default function PlayerMusica() {
   return (
@@ -34,6 +38,34 @@ export default function PlayerMusica() {
           </View>
           <TouchableOpacity onPress={() => { }}>
             <Ionicons name="md-heart" size={32} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.sliderContainer}>
+          <Text style={styles.tempo}>0:09</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="red"
+            maximumTrackTintColor="#000000"
+          />
+          <Text style={styles.tempo}>6:52</Text>
+        </View>
+        <View style={styles.botoes}>
+          <TouchableOpacity onPress={() => { }}>
+            <FontAwesome name="repeat" size={36} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <FontAwesome name="step-backward" size={36} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <FontAwesome name="play-circle" size={36} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <FontAwesome name="step-forward" size={36} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <FontAwesome name="random" size={36} color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -74,6 +106,27 @@ const styles = StyleSheet.create({
   nomeArtista: {
     fontSize: 18,
   },
+  sliderContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
+  },
+  slider: {
+    width: "80%",
+    height: 40,
+  },
+  tempo: {
+    fontSize: 16,
+  },
+  botoes: {
+    width: "100%",
+    flexDirection: "row",
+    // columnGap: 16
+    justifyContent: "space-between",
+    marginBottom: 16,
+  }
 });
 
 
