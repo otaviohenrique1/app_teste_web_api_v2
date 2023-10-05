@@ -6,10 +6,41 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { FontAwesome } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+interface DataProps {
+  musica: string;
+  artista: string;
+  duracao: string;
+}
+
+const initialData = {
+  musica: "",
+  artista: "",
+  duracao: "",
+};
+
+const data = [
+  {
+    musica: "Iron Dragon Fortress",
+    artista: "Dragon Knight",
+    duracao: "6:32",
+  }
+];
 
 export default function PlayerMusica() {
   const [pausado, setPausado] = useState<boolean>(false);
+  const [musica, setMusica] = useState<DataProps>(initialData);
+
+  useEffect(() => {
+    const itemData = data[0];
+    setMusica({
+      musica: itemData.musica,
+      artista: itemData.artista,
+      duracao: itemData.duracao,
+    });
+  }, []);
+
 
   return (
     <View style={styles.container}>
@@ -30,18 +61,16 @@ export default function PlayerMusica() {
           <TouchableOpacity onPress={() => { }}>
             <MaterialIcons name="playlist-add" size={32} color="black" />
           </TouchableOpacity>
-          <View style={{
-            alignItems: "center"
-          }}>
-            <Text style={styles.nomeMusica}>Nome da Musica</Text>
-            <Text style={styles.nomeArtista}>Nome do Artista</Text>
+          <View style={styles.containerMusicaArtista}>
+            <Text style={styles.nomeMusica}>{musica.musica}</Text>
+            <Text style={styles.nomeArtista}>{musica.artista}</Text>
           </View>
           <TouchableOpacity onPress={() => { }}>
             <Ionicons name="md-heart" size={32} color="black" />
           </TouchableOpacity>
         </View>
         <View style={styles.sliderContainer}>
-          <Text style={styles.tempo}>0:09</Text>
+          <Text style={styles.tempo}>0:00</Text>
           <Slider
             style={styles.slider}
             minimumValue={0}
@@ -49,7 +78,7 @@ export default function PlayerMusica() {
             minimumTrackTintColor="red"
             maximumTrackTintColor="#000000"
           />
-          <Text style={styles.tempo}>6:52</Text>
+          <Text style={styles.tempo}>{musica.duracao}</Text>
         </View>
         <View style={styles.botoes}>
           <TouchableOpacity onPress={() => { }}>
@@ -104,6 +133,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "100%"
+  },
+  containerMusicaArtista: {
+    alignItems: "center"
   },
   nomeMusica: {
     fontSize: 22,
